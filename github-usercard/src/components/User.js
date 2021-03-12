@@ -4,13 +4,13 @@ import styled from 'styled-components'
 
 class User extends React.Component {
     state = {
-        user: {},
+        user: [],
     }
 
     componentDidMount() {
         axios.get('https://api.github.com/users/AustinGreer')
         .then (res => {
-            console.log(res)
+            
             this.setState({
                 user: res.data
             })
@@ -25,14 +25,16 @@ class User extends React.Component {
     // }
 
     render() {
+        const { user } = this.state
+
         return (
             <StyledSection>
-                <img src={this.state.user.avatar_url} style={{width: '180px', borderRadius: '50%'}} alt={this.state.user.login} />
+                <img src={user.avatar_url} style={{width: '180px', borderRadius: '50%'}} alt={user.login} />
                 <div>
-                    <h3>Username: {this.state.user.login}</h3>
-                    <h3>Location: {this.state.user.location}</h3>
-                    <h3>Followers: {this.state.user.followers}</h3>
-                    <h3>Following: {this.state.user.following}</h3>
+                    <h3>Username: {user.login}</h3>
+                    <h3>Location: {user.location}</h3>
+                    <h3>Followers: {user.followers}</h3>
+                    <h3>Following: {user.following}</h3>
                 </div>
             </StyledSection>
         )
